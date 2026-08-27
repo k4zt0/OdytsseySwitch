@@ -26,6 +26,8 @@ matches the ADC full scale.
   back, so the panel reflows from one side only
 - No through-hole parts — the module connectors are SMD sockets, so assembly
   needs no soldering at all
+- Routed on both layers, 345 tracks and 207 vias, ground pours stitched
+  together and bonded solid to pads rather than through thermal spokes
 - The ESP32 module's antenna overhangs the left edge; keep metal away from it
 - Ground pours on both layers, stitched with vias
 
@@ -64,6 +66,21 @@ only `Switch_Keyboard_Hotswap_Kailh.pretty` is vendored here, under `libs/`.
 
 ## Status
 
-Schematic passes ERC with zero errors and the netlist has been checked pin by
-pin against the design intent. The board still needs its final placement,
-routing and DRC pass after the switch from through-hole headers to SMD sockets.
+Complete and ready to order.
+
+| Check | Result |
+| ----- | ------ |
+| ERC | 0 errors |
+| DRC | 0 errors |
+| Unconnected | 0 |
+| Schematic parity | 0 issues |
+| Netlist vs. design intent | checked pin by pin, no mismatch |
+
+Two DRC warnings remain and are both expected: the ESP32 module's silkscreen
+crosses the left board edge by 0.15 mm, which is the deliberate antenna
+overhang, and sixteen footprints differ from their library copies, which has no
+bearing on fabrication.
+
+The autorouter did not length-match the USB differential pair. At USB 2.0 Full
+Speed that is not a problem in practice, but tidy those two traces by hand if
+you want it right.
